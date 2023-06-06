@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Nikita Hohulia Home Page</title>
+</head>
+
+<body>
+
+<h2>Nikita Hohulia Home Page - Yoo hoo!</h2>
+<hr>
+<p>Welcome to the Nikita Hohulia Home Page</p>
+
+<!--Display username and role-->
+
+<hr>
+<p>
+    User: <span sec:authentication="principal.username"></span>
+    <br><br>
+    Roles(s): <span sec:authentication="principal.authorities"></span>
+</p>
+
+
+<div sec:authorize="hasRole('MANAGER')">
+    <hr>
+    <p>
+        <a th:href="@{/leaders}">Leadership Meeting</a>
+        (Only for MANAGERS)
+    </p>
+</div>
+
+
+<div sec:authorize="hasRole('ADMIN')">
+    <hr>
+    <p>
+        <a th:href="@{/systems}">IT systems Meeting</a>
+        (Only for ADMINS)
+    </p>
+</div>
+<hr>
+
+
+
+<form action="#" th:action="@{/logout}" method="POST">
+    <input type="submit" value="Logout"/>
+</form>
+
+</body>
+</html>
